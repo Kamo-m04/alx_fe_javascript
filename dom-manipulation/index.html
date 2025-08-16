@@ -3,17 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dynamic Quote Generator with Categories</title>
+  <title>Dynamic Quote Generator with Sync</title>
 </head>
 <body>
   <h1>Dynamic Quote Generator</h1>
 
   <p id="quoteDisplay">Click below to see a random quote!</p>
-
   <button id="newQuote">Show New Quote</button>
 
   <br><br>
-  <!-- Add Quote with category -->
+  <!-- Add Quote -->
   <input type="text" id="newQuoteText" placeholder="Enter new quote">
   <input type="text" id="newCategory" placeholder="Enter category">
   <button id="addQuote">Add Quote</button>
@@ -26,9 +25,13 @@
   </select>
 
   <br><br>
-  <!-- Export & Import JSON -->
+  <!-- Sync + Import/Export -->
+  <button id="syncQuotes">Sync with Server</button>
   <button id="exportJson">Export Quotes (JSON)</button>
   <input type="file" id="importFile" accept=".json" />
+
+  <!-- Status message -->
+  <p id="statusMessage" style="color: green; font-weight: bold;"></p>
 
   <script src="script.js"></script>
 </body>
