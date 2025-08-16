@@ -5,52 +5,61 @@ let quotes = [
   { text: "Do not let what you cannot do interfere with what you can do.", category: "Inspiration" }
 ];
 
-// Function to show a random quote
+// Show a random quote
 function showRandomQuote() {
-  const quoteDisplay = document.getElementById("quoteDisplay");
+  const display = document.getElementById("quoteDisplay");
+  display.innerHTML = "";
 
-  // Pick a random quote
   const randomIndex = Math.floor(Math.random() * quotes.length);
   const quote = quotes[randomIndex];
 
-  // Clear current content
-  quoteDisplay.innerHTML = "";
+  const p = document.createElement("p");
+  p.textContent = `"${quote.text}"`;
 
-  // Create and append elements
-  const quoteText = document.createElement("p");
-  quoteText.textContent = `"${quote.text}"`;
+  const span = document.createElement("span");
+  span.textContent = ` — ${quote.category}`;
+  span.style.fontStyle = "italic";
 
-  const quoteCategory = document.createElement("span");
-  quoteCategory.textContent = `— ${quote.category}`;
-  quoteCategory.style.fontStyle = "italic";
-
-  quoteDisplay.appendChild(quoteText);
-  quoteDisplay.appendChild(quoteCategory);
+  display.appendChild(p);
+  display.appendChild(span);
 }
 
-// Function to add a new quote
+// Add a new quote
 function addQuote() {
-  const newText = document.getElementById("newQuoteText").value.trim();
-  const newCategory = document.getElementById("newQuoteCategory").value.trim();
+  const textInput = document.getElementById("newQuoteText");
+  const categoryInput = document.getElementById("newQuoteCategory");
 
-  if (newText && newCategory) {
-    // Add to quotes array
-    quotes.push({ text: newText, category: newCategory });
+  const text = textInput.value.trim();
+  const category = categoryInput.value.trim();
 
-    // Clear input fields
-    document.getElementById("newQuoteText").value = "";
-    document.getElementById("newQuoteCategory").value = "";
+  if (text && category) {
+    quotes.push({ text, category });
 
-    // Show a new random quote immediately
-    showRandomQuote();
+    // Clear inputs
+    textInput.value = "";
+    categoryInput.value = "";
+
+    // Show newly added quote
+    const display = document.getElementById("quoteDisplay");
+    display.innerHTML = "";
+
+    const p = document.createElement("p");
+    p.textContent = `"${text}"`;
+
+    const span = document.createElement("span");
+    span.textContent = ` — ${category}`;
+    span.style.fontStyle = "italic";
+
+    display.appendChild(p);
+    display.appendChild(span);
   } else {
     alert("Please enter both a quote and a category.");
   }
 }
 
-// Attach event listeners
+// Event listeners
 document.getElementById("newQuote").addEventListener("click", showRandomQuote);
 document.getElementById("addQuoteBtn").addEventListener("click", addQuote);
 
-// Show an initial quote on page load
+// Show initial quote
 showRandomQuote();
